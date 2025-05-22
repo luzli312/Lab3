@@ -14,6 +14,10 @@ import java.util.Map;
 public class CountryCodeConverter {
 
     // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
+    private static List<String> Country;
+    private static List<String> Alpha2code;
+    private static List<String> Alpha3code;
+    private static List<Integer> Numeric;
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -35,6 +39,10 @@ public class CountryCodeConverter {
                     .getClassLoader().getResource(filename).toURI()));
 
             // TODO Task: use lines to populate the instance variable(s)
+            Country.add(lines.get(0));
+            Alpha2code.add(lines.get(1));
+            Alpha3code.add(lines.get(2));
+            Numeric.add(Integer.parseInt(lines.get(2 + 1)));
 
         }
         catch (IOException | URISyntaxException ex) {
@@ -50,7 +58,8 @@ public class CountryCodeConverter {
      */
     public String fromCountryCode(String code) {
         // TODO Task: update this code to use an instance variable to return the correct value
-        return code;
+        int index = Alpha3code.indexOf(code);
+        return Country.get(index);
     }
 
     /**
@@ -60,7 +69,8 @@ public class CountryCodeConverter {
      */
     public String fromCountry(String country) {
         // TODO Task: update this code to use an instance variable to return the correct value
-        return country;
+        int index = Country.indexOf(country);
+        return Alpha3code.get(index);
     }
 
     /**
@@ -69,6 +79,6 @@ public class CountryCodeConverter {
      */
     public int getNumCountries() {
         // TODO Task: update this code to use an instance variable to return the correct value
-        return 0;
+        return Country.size();
     }
 }
